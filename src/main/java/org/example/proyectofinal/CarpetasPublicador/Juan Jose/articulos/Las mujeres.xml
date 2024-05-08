@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nitf xmlns="" xmlns:xsi="" xsi:schemaLocation="">
+    </head>
+        <title>Las mujeres</title>
+        <docdata>
+            <date.issue>05/03/2023</date.issue>
+            <copyright>Juan Jose</copyright>
+        </docdata>
+    </head>
+    <body>
+        <body.content>El 5 de octubre de 1789, las mujeres parisinas partieron desde los barrios obreros hacia la residencia real de Versailles, este suceso dió comienzo a la revolución.</body.content>
+    </body>
+</nitf>

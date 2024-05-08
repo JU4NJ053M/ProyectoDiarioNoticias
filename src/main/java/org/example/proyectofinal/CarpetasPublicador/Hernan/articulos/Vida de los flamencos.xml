@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nitf xmlns="" xmlns:xsi="" xsi:schemaLocation="">
+    </head>
+        <title>Vida de los flamencos</title>
+        <docdata>
+            <date.issue>05/09/2005</date.issue>
+            <copyright>Hernan</copyright>
+        </docdata>
+    </head>
+    <body>
+        <body.content>Los flamencos son aves gregarias altamente especializadas, que habitan sistemas salinos de donde obtienen su alimento (compuesto generalmente de algas microscópicas e invertebrados) y materiales para desarrollar sus hábitos reproductivos.</body.content>
+    </body>
+</nitf>
