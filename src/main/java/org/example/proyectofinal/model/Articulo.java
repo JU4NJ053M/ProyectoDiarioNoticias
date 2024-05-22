@@ -1,29 +1,19 @@
 package org.example.proyectofinal.model;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 
-public class Articulo extends Contenido{
+public class Articulo extends Contenido implements Serializable {
 
-    private String cuerpo;
 
-    public Articulo(String idContenido, String titulo, OffsetDateTime fechaPublicacionOdt,
-                    ZonedDateTime fechaPublicacionZdt, String fechaPublicacion, String cuerpo) {
-        super(idContenido, titulo, fechaPublicacionOdt, fechaPublicacionZdt, fechaPublicacion);
-        this.cuerpo = cuerpo;
+    public Articulo(String titulo, String fechaPublicacion, String publicador) {
+        super(titulo, fechaPublicacion,"setear",publicador);
+    }
+    public Articulo(String titulo, String fechaPublicacion, String cuerpo, String publicador) {
+        super(titulo, fechaPublicacion,cuerpo,publicador);
     }
 
-    public Articulo(String idContenido, String titulo, String fechaPublicacion, String cuerpo) {
-        super(idContenido, titulo, fechaPublicacion);
-        this.cuerpo = cuerpo;
-    }
 
-    public String getCuerpo() {
-        return cuerpo;
-    }
-
-    public void setCuerpo(String cuerpo) {
-        this.cuerpo = cuerpo;
-    }
 
 }

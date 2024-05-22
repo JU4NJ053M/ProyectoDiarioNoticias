@@ -1,41 +1,23 @@
 package org.example.proyectofinal.model;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 
-public class Contenido {
-
-    private String idContenido;
+public class Contenido implements Serializable {
 
     private String titulo;
+    private String cuerpo;
+    private String publicador;
 
-    private OffsetDateTime fechaPublicacionOdt;
-
-    private ZonedDateTime fechaPublicacionZdt;
 
     private String fechaPublicacion;
 
-    public Contenido(String idContenido, String titulo, OffsetDateTime fechaPublicacionOdt,
-                     ZonedDateTime fechaPublicacionZdt, String fechaPublicacion) {
-        this.idContenido = idContenido;
-        this.titulo = titulo;
-        this.fechaPublicacionOdt = fechaPublicacionOdt;
-        this.fechaPublicacionZdt = fechaPublicacionZdt;
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
-    public Contenido(String idContenido, String titulo, String fechaPublicacion) {
-        this.idContenido = idContenido;
+    public Contenido(String titulo, String fechaPublicacion, String cuerpo, String publicador) {
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
-    }
-
-    public String getIdContenido() {
-        return idContenido;
-    }
-
-    public void setIdContenido(String idContenido) {
-        this.idContenido = idContenido;
+        this.publicador = publicador;
+        this.cuerpo = cuerpo;
     }
 
     public String getTitulo() {
@@ -46,27 +28,32 @@ public class Contenido {
         this.titulo = titulo;
     }
 
-    public OffsetDateTime getFechaPublicacionOdt() {
-        return fechaPublicacionOdt;
-    }
-
-    public void setFechaPublicacionOdt(OffsetDateTime fechaPublicacionOdt) {
-        this.fechaPublicacionOdt = fechaPublicacionOdt;
-    }
-
-    public ZonedDateTime getFechaPublicacionZdt() {
-        return fechaPublicacionZdt;
-    }
-
-    public void setFechaPublicacionZdt(ZonedDateTime fechaPublicacionZdt) {
-        this.fechaPublicacionZdt = fechaPublicacionZdt;
-    }
-
     public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
     public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public String getCuerpo() {
+        return cuerpo;
+    }
+
+    public void setCuerpo(String cuerpo) {
+        this.cuerpo = cuerpo;
+    }
+
+
+    public String getPublicador() {
+        return publicador;
+    }
+
+    public void setPublicador(String publicador) {
+        this.publicador = publicador;
+    }
+
+    public String getRuta (){
+        return "src\\main\\java\\org\\example\\proyectofinal\\BaseDatos\\CarpetasPublicadores\\";
     }
 }

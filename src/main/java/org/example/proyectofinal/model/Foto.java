@@ -1,22 +1,13 @@
 package org.example.proyectofinal.model;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 
-public class Foto extends Contenido{
-    byte[] cuerpo;
+public class Foto extends Contenido implements Serializable {
 
-    public Foto(String idContenido, String titulo, OffsetDateTime fechaPublicacionOdt,
-                ZonedDateTime fechaPublicacionZdt,String fechaPublicacion, byte[] cuerpo) {
-        super(idContenido, titulo, fechaPublicacionOdt, fechaPublicacionZdt, fechaPublicacion);
-        this.cuerpo = cuerpo;
+    public Foto(String titulo, String fechaPublicacion, String publicador) {
+        super(titulo, fechaPublicacion, "No aplica", publicador);
     }
 
-    public byte[] getCuerpo() {
-        return cuerpo;
-    }
-
-    public void setCuerpo(byte[] cuerpo) {
-        this.cuerpo = cuerpo;
-    }
 }

@@ -1,61 +1,40 @@
 package org.example.proyectofinal.model;
 
+import org.example.proyectofinal.controller.ModelFactoryController;
+import org.example.proyectofinal.exceptions.CarpetaException;
+import org.example.proyectofinal.util.ArchivosUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import static org.example.proyectofinal.util.Constantes.RUTA_CARPETA_PUBLICADOR;
-
-public class Publicador extends Usuario{
-
-    private String nombrePublicador;
-
-    private String idPublicador;
+public class Publicador extends Usuario implements Serializable {
 
     private ArrayList<Articulo> articulos;
-
     private ArrayList<Foto> fotos;
 
+    private final String rutaCarpeta;
     private String rutaCarpetaArticulos;
     private String rutaCarpetaFotos;
 
-    private String urlDelSitioWeb;
-
-    public Publicador(String correo, String contraseña, String nombrePublicador, String idPublicador,
-                      ArrayList<Articulo> articulos, ArrayList<Foto> fotos, String urlDelSitioWeb) {
-        super(correo, contraseña);
-        this.nombrePublicador = nombrePublicador;
-        this.idPublicador = idPublicador;
-        this.articulos = articulos;
-        this.fotos = fotos;
-        this.rutaCarpetaArticulos = obtenerRutaCarpetaArticulos();
-        this.rutaCarpetaFotos = obtenerRutaCarpetaFotos();
-        this.urlDelSitioWeb = urlDelSitioWeb;
+    public Publicador(String nombre, String telefono, String correo, String idUsuario, String contraseña) throws CarpetaException {
+        super(nombre, telefono, correo, idUsuario, contraseña);
+        this.articulos = new ArrayList<>();
+        this.fotos = new ArrayList<>();
+        this.rutaCarpeta = "src\\main\\java\\org\\example\\proyectofinal\\BaseDatos\\CarpetasPublicadores\\" + getIdUsuario();
+        crearCarpetaPublicador();
     }
 
-    private String obtenerRutaCarpetaFotos() {
-        return String.format("%s/%s/fotos", RUTA_CARPETA_PUBLICADOR, getNombrePublicador());
-    }
-
-
-    private String obtenerRutaCarpetaArticulos() {
-        return String.format("%s/%s/articulos", RUTA_CARPETA_PUBLICADOR, getNombrePublicador());
-    }
-
-
-    public String getNombrePublicador() {
-        return nombrePublicador;
-    }
-
-    public void setNombrePublicador(String nombrePublicador) {
-        this.nombrePublicador = nombrePublicador;
-    }
-
-    public String getIdPublicador() {
-        return idPublicador;
-    }
-
-    public void setIdPublicador(String idPublicador) {
-        this.idPublicador = idPublicador;
+    public String getRutaCarpeta() {
+        return rutaCarpeta;
     }
 
     public ArrayList<Articulo> getArticulos() {
@@ -90,11 +69,72 @@ public class Publicador extends Usuario{
         this.rutaCarpetaFotos = rutaCarpetaFotos;
     }
 
-    public String getUrlDelSitioWeb() {
-        return urlDelSitioWeb;
+    public void setFoto(Foto foto) {
+        this.fotos.add(foto);
+    }
+    public void setArticulo(Articulo articulo) {
+        this.articulos.add(articulo);
     }
 
-    public void setUrlDelSitioWeb(String urlDelSitioWeb) {
-        this.urlDelSitioWeb = urlDelSitioWeb;
+    public void crearCarpetaPublicador() throws CarpetaException {
+        rutaCarpetaArticulos = String.format(
+                "%s/%s",
+                rutaCarpeta,
+                "articulos"
+        );
+
+        rutaCarpetaFotos = String.format(
+                "%s/%s",
+                rutaCarpeta,
+                "fotos"
+        );
+
+        File creadorCarpetaArticulos = new File(rutaCarpetaArticulos);
+        File creadorCarpetaFotos = new File(rutaCarpetaFotos);
+
+        if (!creadorCarpetaArticulos.exists() && !creadorCarpetaFotos.exists()) {
+            boolean existe = creadorCarpetaArticulos.mkdirs() && creadorCarpetaFotos.mkdirs();
+            if (existe) {
+                System.out.println("Se creo correctamente la carpeta");
+            } else {
+                throw new CarpetaException("Error: No se pudo crear la carpeta");
+            }
+        } else {
+            System.out.println("La carpeta ya existe");
+        }
+    }
+
+
+    public void agregarArticulo(Articulo articulo) {
+        this.articulos.add(articulo);
+        ModelFactoryController.getInstance().actualizarPublicadorSesion(this);
+    }
+
+
+    public void agregarFoto(Foto foto) {
+        this.fotos.add(foto);
+        ModelFactoryController.getInstance().actualizarPublicadorSesion(this);
+    }
+
+    public void eliminarFoto(Foto foto) {
+        Path filePath = Paths.get(rutaCarpetaFotos, foto.getTitulo());
+        try {
+            Files.deleteIfExists(filePath);
+            this.fotos.remove(foto);
+            ModelFactoryController.getInstance().actualizarPublicadorSesion(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarArticulo(Articulo articulo) {
+        Path filePath = Paths.get(rutaCarpetaArticulos, articulo.getTitulo());
+        try {
+            Files.deleteIfExists(filePath);
+            this.articulos.remove(articulo);
+            ModelFactoryController.getInstance().actualizarPublicadorSesion(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

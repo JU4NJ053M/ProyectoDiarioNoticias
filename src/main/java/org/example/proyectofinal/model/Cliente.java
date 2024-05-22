@@ -1,55 +1,38 @@
 package org.example.proyectofinal.model;
 
-public class Cliente extends Usuario{
+import org.example.proyectofinal.exceptions.CarpetaException;
 
-    private String nombre;
+import java.io.File;
+import java.io.Serializable;
 
-    private String idCliente;
+public class Cliente extends Usuario  {
 
-    private  String rutaArticulo;
+    private final String rutaCarpeta;
 
-    private String rutaFotos;
+    public Cliente(String nombre, String telefono, String correo, String idUsuario, String contraseña) throws CarpetaException {
+        super(nombre, telefono, correo, idUsuario, contraseña);
+        this.rutaCarpeta = obtenerRutaCarpeta();
+        crearCarpetaCliente();
 
-    public Cliente(String correo, String contraseña, String nombre, String idCliente,
-                   String rutaArticulo, String rutaFotos) {
-        super(correo, contraseña);
-        this.nombre = nombre;
-        this.idCliente = idCliente;
-        this.rutaArticulo = rutaArticulo;
-        this.rutaFotos = rutaFotos;
     }
 
-
-
-    public String getNombre() {
-        return nombre;
+    public String obtenerRutaCarpeta() {
+        return String.format("%s/%s/",
+                "src\\main\\java\\org\\example\\proyectofinal\\BaseDatos\\CarpetasClientes", getIdUsuario());
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void crearCarpetaCliente() throws CarpetaException {
+        File creadorCarpeta = new File(rutaCarpeta);
+        if (!creadorCarpeta.exists()) {
+            boolean existe = creadorCarpeta.mkdirs();
+            if (existe) {
+                System.out.println("Se creo correctamente la carpeta");
+            } else {
+                throw new CarpetaException("Error: No se pudo crear la carpeta");
+            }
+        } else {
+            throw new CarpetaException("Error: La carpeta ya existe");
+        }
     }
 
-    public String getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public String getRutaArticulo() {
-        return rutaArticulo;
-    }
-
-    public void setRutaArticulo(String rutaArticulo) {
-        this.rutaArticulo = rutaArticulo;
-    }
-
-    public String getRutaFotos() {
-        return rutaFotos;
-    }
-
-    public void setRutaFotos(String rutaFotos) {
-        this.rutaFotos = rutaFotos;
-    }
 }

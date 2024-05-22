@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyectofinal.viewController.GestionAdminController">
+   <children>
+      <Label fx:id="labelGestorAdmin" alignment="CENTER" contentDisplay="CENTER" layoutX="257.0" layoutY="26.0" prefHeight="46.0" prefWidth="385.0" text="Gestión del Administrador">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableUsuarios" editable="true" layoutX="47.2" layoutY="352.0" prefHeight="302.0" prefWidth="806.0">
+         <columns>
+            <TableColumn fx:id="colNombre" prefWidth="133.60000151395798" text="Nombre" />
+            <TableColumn fx:id="colTelefono" prefWidth="135.99998474121094" text="Teléfono" />
+            <TableColumn fx:id="colCorreo" prefWidth="135.199951171875" text="Correo" />
+            <TableColumn fx:id="colIdUsuario" prefWidth="152.80007934570312" text="id (Usuario)" />
+            <TableColumn fx:id="colContraseña" prefWidth="128.0" text="Contraseña" />
+            <TableColumn fx:id="colTipoUsuario" prefWidth="124.7999267578125" text="Tipo de Usuario" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnCerrarSesion" layoutX="47.0" layoutY="31.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="37.0" prefWidth="107.0" text="Cerrar Sesion">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <TextField fx:id="txtNombre" layoutX="338.0" layoutY="131.0" promptText="Ingresa el nombre">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <Label layoutX="385.0" layoutY="95.0" text="Nombre">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="563.0" layoutY="95.0" text="Teléfono">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTelefono" layoutX="518.0" layoutY="131.0" promptText="Ingresa el teléfono">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <Label layoutX="479.0" layoutY="184.0" text="Usuario">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtIdUsuario" layoutX="430.0" layoutY="212.0" promptText="Ingresa el usuario">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <Label layoutX="656.0" layoutY="184.0" text="Contraseña">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtContraseña" layoutX="619.0" layoutY="212.0" promptText="Ingresa la contraseña">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <Button fx:id="btnLimpiar" layoutX="295.0" layoutY="297.0" mnemonicParsing="false" onAction="#limpiarDatos" text="Limpiar Texto">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnActualizar" layoutX="468.0" layoutY="297.0" mnemonicParsing="false" onAction="#actualizarUsuario" text="Actualizar Datos">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnAñadir" layoutX="122.0" layoutY="297.0" mnemonicParsing="false" onAction="#registrarUsuario" text="Añadir Usuario">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnEliminar" layoutX="643.0" layoutY="297.0" mnemonicParsing="false" onAction="#eliminarUsuario" text="Eliminar Usuario">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ComboBox fx:id="comBoxTipoUsuario" layoutX="52.0" layoutY="130.0" prefHeight="26.0" prefWidth="235.0" promptText="Elije el tipo de usuario para registrar">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Administrador" />
+               <String fx:value="Publicador" />
+               <String fx:value="Cliente" />
+               <String fx:value="Gestor de Procesamiento" />
+               <String fx:value="Gestor de Envío" />
+            </FXCollections>
+         </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <Label layoutX="755.0" layoutY="95.0" text="Correo">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCorreo" layoutX="703.0" layoutY="131.0" promptText="Ingresa el correo">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+   </children>
+</AnchorPane>
